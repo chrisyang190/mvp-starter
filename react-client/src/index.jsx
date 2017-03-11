@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: examplePokemonData
+      items: examplePokemonData,
+      searchedPokemon: null
       // items: []
     }
   }
@@ -34,6 +35,11 @@ class App extends React.Component {
     });
   }
 
+  setQuery (event) {
+    this.setState({
+      searchedPokemon: event.target.value.toLowerCase()
+    })
+  }
   // componentDidMount() {
   //   $.ajax({
   //     url: 'http://pokeapi.co/api/v2/pokemon/1/',
@@ -56,8 +62,8 @@ class App extends React.Component {
     return (<div>
       <h1>Pokemon Team Builder</h1>
       <List items={this.state.items}/>
-
-      <button className='addPokemon' onClick={this.addPokemon.bind(this, 3)}>Add Pokemon</button>
+      <input type="text" onKeyUp={this.setQuery.bind(this)}/>
+      <button className='addPokemon' onClick={this.addPokemon.bind(this, this.state.searchedPokemon)}>Add Pokemon</button>
     </div>)
   }
 }

@@ -1,5 +1,5 @@
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
@@ -35,12 +35,21 @@ var User = mongoose.model('User', userSchema);
 var teamSchema = mongoose.Schema({
   'teamname': String,
   'username': String, 
-  'teamArray' : [Schema.Types.Mixed] // definitely need to check if this works
+  'teamArray' : [] // definitely need to check if this works
 
 });
 
 var Team = mongoose.model('Team', teamSchema);
 
 
+var selectAll = function(callback) {
+  Item.find({}, function(err, items) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, items);
+    }
+  });
+};
 
 module.exports.selectAll = selectAll;
