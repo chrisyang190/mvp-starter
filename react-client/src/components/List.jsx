@@ -6,7 +6,6 @@ const List = (props) => (
     <h4> Pokemon Team </h4>
     You have { props.items.length } on this team!
     { props.items.map(item => <ListItem item={item}/>)}
-    <button className='addPokemon'>Add Pokemon</button>
   </div>
 )
 

@@ -13,7 +13,27 @@ class App extends React.Component {
     }
   }
 
-  
+  addPokemon (number) {
+    console.log('clicked');
+    var context = this;
+    console.log('context', context);
+    $.ajax({
+      url: 'http://pokeapi.co/api/v2/pokemon/' + number + '/',
+      success: (data) => {
+        console.log('name' , data.name);
+        data.name = data.name.slice(0,1).toUpperCase() + data.name.slice()
+        examplePokemonData.push(data);
+        context.setState({
+          items: examplePokemonData
+          // items: this.state.examplePokemonData.concat([data])
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
   // componentDidMount() {
   //   $.ajax({
   //     url: 'http://pokeapi.co/api/v2/pokemon/1/',
@@ -36,6 +56,8 @@ class App extends React.Component {
     return (<div>
       <h1>Pokemon Team Builder</h1>
       <List items={this.state.items}/>
+
+      <button className='addPokemon' onClick={this.addPokemon.bind(this, 3)}>Add Pokemon</button>
     </div>)
   }
 }
