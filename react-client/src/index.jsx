@@ -21,7 +21,7 @@ class App extends React.Component {
       url: 'http://pokeapi.co/api/v2/pokemon/' + number + '/',
       success: (data) => {
         console.log('name' , data.name);
-        data.name = data.name.slice(0,1).toUpperCase() + data.name.slice()
+        data.name = data.name.slice(0,1).toUpperCase() + data.name.slice(1);
         examplePokemonData.push(data);
         context.setState({
           items: examplePokemonData

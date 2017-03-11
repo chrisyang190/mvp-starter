@@ -1,5 +1,8 @@
+
+var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
+
 
 var db = mongoose.connection;
 
@@ -11,21 +14,33 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var userSchema = mongoose.Schema ({
+  'username': { type: String, index: {unique: true} },
+  'password': String
 });
 
-var Item = mongoose.model('Item', itemSchema);
-
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
+userSchema.methods.comparePassword = function(storePassword, attemptedPassword,callback) {
+  bcrypt.compare(storedPassword, attemptedPassword, function(err, isMatch){
+    if (err) {
+      callback(err);
     } else {
-      callback(null, items);
+      callback(null, isMatch);
     }
-  });
-};
+  })
+}
+
+var User = mongoose.model('User', userSchema);
+
+//can team also be thrown in same file?
+var teamSchema = mongoose.Schema({
+  'teamname': String,
+  'username': String, 
+  'teamArray' : [Schema.Types.Mixed] // definitely need to check if this works
+
+});
+
+var Team = mongoose.model('Team', teamSchema);
+
+
 
 module.exports.selectAll = selectAll;
