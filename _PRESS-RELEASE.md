@@ -19,46 +19,46 @@ Once the project moves into development, the press release can be used as a touc
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
-RewardsTracker
+Pokemon Team Formulator
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
 
-For the rewards and point collectors out there, effortlessly maximize the assets you receive with the credit cards you own
+For the compeitive trainer, plan out the team you will build to face other Pokemon trainers!
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
-RewardsTracker aims to keep track of the rewards and point bonuses you can accumulate with your credit cards. Our functionalities will guide you through which credit card should be used on whichever spending transaction you are operating. Other functionalities, your history of credit card application dates and upcoming annual fees are also included.
+The Team Formulator will help end users plan out their Pokemon teams and store this information for future reference. 
  
 
 ## Problem ##
   > Describe the problem your product solves.
 
-For those into collecting points and reward currencies on different credit cards, it may be hard to keep track of which credit card should be used to fully maximize your rewards. 
+There are currently several strategies for battling. It can be hard to remember all of the teams trainers have strategically come up with.  
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
 
-RewardsTracker artfully keeps track of the cashback or rewards percentages of credit cards so that you can be reminded of which one to use for any transaction at hand 
+Team Formulator helps keep track of each trainer's pokemon teams!
 
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
 
-'Keep track of the rewards you can acquire!'
+'Prepare for trouble.'
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
 
-Create an account, input the credit cards you are using, and organize how you save your rewards!
+Create an account, and start planning teams you want to battle with!
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
 
-'RewardsTracker is a seemless app that has greatly helped me organize how I manage and accumulate rewards!'
+'This is an awesome product that I use to keep track of my Pokemon teams with.'
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
 
-Head over to RewardsTracker.com to start organizing your rewards!
+Head over to PokemonTeamConstructor.com to start organizing your teams!
