@@ -16,6 +16,20 @@ class App extends React.Component {
     
   }
 
+  componentDidMount() {
+    $.ajax({
+      url: '/', 
+      success: (data) => {
+        this.setState({
+          items: examplePokemonData
+        })
+        console.log('data', data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
   addPokemon (number) {
     console.log('clicked addPokemon');
     var context = this;
@@ -63,20 +77,22 @@ class App extends React.Component {
   //   });
   // }
 
-  handlePost (){
-    var data = {};
-    data.user = this.state.user;
+  handlePost (event){
+    event.preventDefault();
+    var req = {};
+    req.user = this.state.user;
+    console.log('req.user', req.user)
 
     $.ajax({
-      url: '/items',
-      type: 'GET',
-      data: JSON.stringify(data),
-      contentType: 'applciation/json',
+      url: 'http://127.0.0.1:3000',
+      type: 'POST',
+      data: JSON.stringify(req),
+      contentType: 'application/json',
       success: (data) => {
-        console.log('data in PostUser' , data);
+        console.log('data in handlePost:' , data);
       },
-      error: (err) => {
-        console.log('err', err);
+      error: (error) => {
+        console.log('err', error);
       }
     })
   }
@@ -108,7 +124,7 @@ class App extends React.Component {
     return (<div>
       <h1>Pokemon Team Builder</h1>
       Enter Trainer Name: 
-      <input type ="text" onKeyUp ={this.setUser.bind(this)}/>
+      <input type ="text" onChange ={this.setUser.bind(this)}/>
       <button className='setUser' onClick= {this.handlePost.bind(this)}>Submit</button>
 
       <input type="text" onKeyUp={this.setQuery.bind(this)}/>

@@ -30,8 +30,14 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 //   });
 // });
 
-// app.post('/' , handler.enterUser);
+app.post('/' , handler.enterUser);
 // app.get('/', handler.enterUser);
+
+// app.post('/', function(req,res){
+//   console.log('Handling post');
+//  res.sendStatus(201);
+
+// })
 
 
 app.listen(3000, function() {
