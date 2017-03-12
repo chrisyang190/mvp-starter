@@ -12,6 +12,9 @@ var handler = require('./request-handler');
 
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -30,8 +33,11 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 //   });
 // });
 
-app.post('/' , handler.enterUser);
-// app.get('/', handler.enterUser);
+app.post('/users' , handler.enterUser);
+// app.get('/users', function(req, res){
+//   res.json({user: 'test'});
+// });
+app.get('/users', handler.getAllUsers);
 
 // app.post('/', function(req,res){
 //   console.log('Handling post');

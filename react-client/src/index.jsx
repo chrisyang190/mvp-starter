@@ -12,13 +12,14 @@ class App extends React.Component {
       items: examplePokemonData,
       searchedPokemon: null
       // items: []
-    };
-    
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this); 
   }
 
   componentDidMount() {
     $.ajax({
-      url: '/', 
+      url: '/users', 
       success: (data) => {
         this.setState({
           items: examplePokemonData
@@ -51,7 +52,7 @@ class App extends React.Component {
     });
   }
 
-  setUser (event) {
+  handleChange (event) {
     console.log('user set');
     this.setState({
       user: event.target.value
@@ -60,36 +61,21 @@ class App extends React.Component {
     // this.handlePost();
   }
 
-  // postUser(user){
-  //   console.log('posting user', user);
-  //   $.ajax({
-  //     url: 'http://127.0.0.1:3000/',
-  //     // type: 'POST',
-  //     type: 'GET',
-  //     data: JSON.stringify(user),
-  //     contentType: 'application/json',
-  //     success: (data) => {
-  //       console.log('data in PostUser' , data);
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
-
-  handlePost (event){
+   handleSubmit (event){
     event.preventDefault();
     var req = {};
     req.user = this.state.user;
-    console.log('req.user', req.user)
+    console.log('req.user', req.user);
 
     $.ajax({
-      url: 'http://127.0.0.1:3000',
+      url: '/users',
       type: 'POST',
+      // data: JSON.stringify(req)
       data: JSON.stringify(req),
       contentType: 'application/json',
       success: (data) => {
-        console.log('data in handlePost:' , data);
+        console.log('data in success function:' , data);
+        console.log('user in Success FunctioN:', req.user);
       },
       error: (error) => {
         console.log('err', error);
@@ -123,9 +109,13 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Pokemon Team Builder</h1>
-      Enter Trainer Name: 
-      <input type ="text" onChange ={this.setUser.bind(this)}/>
-      <button className='setUser' onClick= {this.handlePost.bind(this)}>Submit</button>
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Enter Trainer Name:
+          <input type="textarea" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
 
       <input type="text" onKeyUp={this.setQuery.bind(this)}/>
       <button className='addPokemon' onClick={this.addPokemon.bind(this, this.state.searchedPokemon)}>Add Pokemon</button>

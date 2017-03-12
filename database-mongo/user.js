@@ -8,9 +8,18 @@ var userSchema = mongoose.Schema ({
   'team' : [] // definitely need to check if this works
 });
 
- userSchema.methods.portrayTeam = function (username) {
+var User = mongoose.model('User', userSchema);
 
- }
+User.selectAll = function(callback) {
+  User.find({}, function(err, users) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, users);
+    }
+  });
+};
+
 // userSchema.methods.comparePassword = function(storePassword, attemptedPassword,callback) {
 //   bcrypt.compare(storedPassword, attemptedPassword, function(err, isMatch){
 //     if (err) {
@@ -21,6 +30,6 @@ var userSchema = mongoose.Schema ({
 //   });
 // }
 
-var User = mongoose.model('User', userSchema);
+
 
 module.exports = User;
