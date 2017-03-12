@@ -8,20 +8,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+      user: null,
       items: examplePokemonData,
       searchedPokemon: null
       // items: []
-    }
+    };
+    
   }
 
   addPokemon (number) {
-    console.log('clicked');
+    console.log('clicked addPokemon');
     var context = this;
     console.log('context', context);
     $.ajax({
       url: 'http://pokeapi.co/api/v2/pokemon/' + number + '/',
       success: (data) => {
-        console.log('name' , data.name);
+        console.log('name' , data);
         data.name = data.name.slice(0,1).toUpperCase() + data.name.slice(1);
         examplePokemonData.push(data);
         context.setState({
@@ -33,6 +35,50 @@ class App extends React.Component {
         console.log('err', err);
       }
     });
+  }
+
+  setUser (event) {
+    console.log('user set');
+    this.setState({
+      user: event.target.value
+    });
+    // this.postUser(this.state.user);
+    // this.handlePost();
+  }
+
+  // postUser(user){
+  //   console.log('posting user', user);
+  //   $.ajax({
+  //     url: 'http://127.0.0.1:3000/',
+  //     // type: 'POST',
+  //     type: 'GET',
+  //     data: JSON.stringify(user),
+  //     contentType: 'application/json',
+  //     success: (data) => {
+  //       console.log('data in PostUser' , data);
+  //     },
+  //     error: (err) => {
+  //       console.log('err', err);
+  //     }
+  //   });
+  // }
+
+  handlePost (){
+    var data = {};
+    data.user = this.state.user;
+
+    $.ajax({
+      url: '/items',
+      type: 'GET',
+      data: JSON.stringify(data),
+      contentType: 'applciation/json',
+      success: (data) => {
+        console.log('data in PostUser' , data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    })
   }
 
   setQuery (event) {
@@ -61,9 +107,14 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Pokemon Team Builder</h1>
-      <List items={this.state.items}/>
+      Enter Trainer Name: 
+      <input type ="text" onKeyUp ={this.setUser.bind(this)}/>
+      <button className='setUser' onClick= {this.handlePost.bind(this)}>Submit</button>
+
       <input type="text" onKeyUp={this.setQuery.bind(this)}/>
       <button className='addPokemon' onClick={this.addPokemon.bind(this, this.state.searchedPokemon)}>Add Pokemon</button>
+      <List items={this.state.items}/>
+      
     </div>)
   }
 }
