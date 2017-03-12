@@ -35,18 +35,30 @@ var Promise = require("bluebird");
 // }
 
 exports.getAllUsers = function(req, res){
-  console.log('grabbing all existing users');
-  // res.json({user: 'test in getAllUsers'})
+  console.log('get All Users REQUEST', req);
   User.selectAll(function(err, data){
     if(err) {
       console.log('entered error');
       res.sendStatus(500);
     } else {
-      console.log('entered selectAll');
+      // console.log('entered selectAll data:', data);
       res.json(data);
     }
   });
 
+}
+
+exports.getOneUser = function(req, res) {
+  console.log('request', req)
+  User.selectOne(req.body.user, function(err, data){
+    if(err){
+      console.log('entered error');
+      res.sendStatus(500);
+    } else {
+      console.log('entered selectOne data:', data);
+      res.json(data);
+    }
+  })
 }
 
 // exports.enterUser = function (req, res) {
@@ -77,7 +89,7 @@ exports.enterUser = function (req, res) {
     if(!user || error) {
       var newUser = new User({
         username: trainername,
-        team: [{name: 'espeon'}, {name: 'umbreon'}]
+        team: req.body.team
       });
 
       newUser.save(function(error, newUser){

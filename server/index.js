@@ -37,6 +37,7 @@ app.post('/users' , handler.enterUser);
 // app.get('/users', function(req, res){
 //   res.json({user: 'test'});
 // });
+app.get('/users/pokemon', handler.getOneUser);
 app.get('/users', handler.getAllUsers);
 
 // app.post('/', function(req,res){

@@ -39,8 +39,10 @@ class App extends React.Component {
       url: 'http://pokeapi.co/api/v2/pokemon/' + number + '/',
       success: (data) => {
         console.log('name' , data);
-        data.name = data.name.slice(0,1).toUpperCase() + data.name.slice(1);
-        examplePokemonData.push(data);
+        var pokemon = {};
+        pokemon.name = data.name.slice(0,1).toUpperCase() + data.name.slice(1);
+        pokemon.image = data.sprites.front_default;
+        examplePokemonData.push(pokemon);
         context.setState({
           items: examplePokemonData
           // items: this.state.examplePokemonData.concat([data])
@@ -57,15 +59,34 @@ class App extends React.Component {
     this.setState({
       user: event.target.value
     });
+
+    var req = {};
+    req.user = this.state.user;
     // this.postUser(this.state.user);
     // this.handlePost();
+    // var context = this;
+    // $.ajax({
+    //   url:'/users/pokemon',
+    //   type: 'GET',
+    //   data: JSON.stringify(req),
+    //   contentType: 'application/json',
+    //   success:(data)=> {
+    //     console.log('data on get:', data);
+    //     // context.setState({
+    //     //   items: data.body.team;
+    //     //   // items: this.state.examplePokemonData.concat([data])
+    //     // })
+    //   }
+    // })
   }
 
    handleSubmit (event){
     event.preventDefault();
     var req = {};
     req.user = this.state.user;
+    req.team = this.state.items;
     console.log('req.user', req.user);
+    var context = this;
 
     $.ajax({
       url: '/users',
@@ -76,6 +97,9 @@ class App extends React.Component {
       success: (data) => {
         console.log('data in success function:' , data);
         console.log('user in Success FunctioN:', req.user);
+        context.setState({
+          items: data.team
+        })
       },
       error: (error) => {
         console.log('err', error);
