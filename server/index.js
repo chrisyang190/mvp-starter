@@ -34,6 +34,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // });
 
 app.post('/users' , handler.enterUser);
+app.post('/users/save' , handler.saveUser);
 // app.get('/users', function(req, res){
 //   res.json({user: 'test'});
 // });

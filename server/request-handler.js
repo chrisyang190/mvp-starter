@@ -35,7 +35,7 @@ var Promise = require("bluebird");
 // }
 
 exports.getAllUsers = function(req, res){
-  console.log('get All Users REQUEST', req);
+  // console.log('get All Users REQUEST', req);
   User.selectAll(function(err, data){
     if(err) {
       console.log('entered error');
@@ -55,27 +55,11 @@ exports.getOneUser = function(req, res) {
       console.log('entered error');
       res.sendStatus(500);
     } else {
-      console.log('entered selectOne data:', data);
+      // console.log('entered selectOne data:', data);
       res.json(data);
     }
   })
 }
-
-// exports.enterUser = function (req, res) {
-
-//   console.log('request user in EnterUSER', req.body.user);
-//   var newUser = new User({
-//         username: 'Test Body Parser 4',
-//         team: [{name: 'espeon'}, {name: 'umbreon'}]
-//       });
-//   console.log('new user before save', newUser)
-//       newUser.save(function(error, newUser){
-//           console.log('User created');
-//           // res.status(201, newUser);
-//           res.status(201).send(newUser);
-    
-//       })
-// }
 
 exports.enterUser = function (req, res) {
   console.log('entered user function');
@@ -84,8 +68,6 @@ exports.enterUser = function (req, res) {
   // console.log
   User.findOne({username: trainername})
   .exec(function(error, user){
-    console.log('error out:', error);
-    console.log('user queried', user);
     if(!user || error) {
       var newUser = new User({
         username: trainername,
@@ -100,10 +82,33 @@ exports.enterUser = function (req, res) {
     
       })
     } else {
-      //portray users team?
-      console.log('User Exists:', user)
-      // res.send(200, newUser);
+      console.log('User Exists for enter user:', user)
       res.status(200).send(user);
+    }
+  })
+}
+
+exports.saveUser = function(req, res){
+  var trainername = req.body.user;
+  console.log('trainer name saved', req.body.user)
+  User.findOne({username: trainername})
+  .exec(function(error,user){
+    if (!user){
+      var newUser = new User ({
+        username: trainername,
+        team: req.body.team
+      });
+
+      newUser.save(function(error, newUser){
+        console.log('User created from save');
+        res.status(201).send(newUser);
+      })
+    } else {
+      console.log('User existing: saving user data', user)
+      user.team = req.body.team;
+      user.save(function(error, user){
+        res.status(201).send(user);
+      })
     }
   })
 }
