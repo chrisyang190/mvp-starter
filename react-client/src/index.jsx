@@ -90,7 +90,7 @@ class App extends React.Component {
 
   setQuery (event) {
     this.setState({
-      searchedPokemon: event.target.value.toLowerCase()
+      searchedPokemon: event.toLowerCase()
     })
   }
 
@@ -132,15 +132,12 @@ class App extends React.Component {
       <h1>Pokemon Team Builder</h1>
       <form onSubmit={this.handleSubmit}>
         <label>
-          Enter Trainer Name:
+          <div>Enter Trainer Name:</div>
           <input type="textarea" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Search" />
       </form>
-
-      <input type="text" onKeyUp={this.setQuery.bind(this)}/>
-      <button className='addPokemon' onClick={this.addPokemon.bind(this, this.state.searchedPokemon)}>Add Pokemon</button>
-      <List items={this.state.items}/>
+      <List items={this.state.items} searchedPokemon={this.state.searchedPokemon} setQuery={this.setQuery.bind(this)} addPokemon={this.addPokemon.bind(this)}/>
       <button className='save' onClick={this.saveTeam.bind(this)}> Save Team </button>
       <button className='reset' onClick={this.resetTeam.bind(this)}> Reset Team </button>
     </div>)
