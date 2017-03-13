@@ -1,0 +1,15 @@
+body{
+  text-align: center;
+  font-family: Arial;
+  /*background: url(Pokeball.jpg) repeat 0 0;*/
+
+}
+h1 {
+  /*background: #ef5350;*/
+    background: #f9605d;
+    color: white;
+    margin: 25px 0px 20px 0px;
+    height: 60px;
+    line-height: 60px;
+
+}
