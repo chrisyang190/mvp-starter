@@ -4,8 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema ({
   'username': { type: String, index: {unique: true} },
-  // 'password': String
-  'team' : [] // definitely need to check if this works
+  'team' : []
 });
 
 var User = mongoose.model('User', userSchema);
@@ -15,7 +14,6 @@ User.selectAll = function(callback) {
     if(err) {
       callback(err, null);
     } else {
-      // console.log('users in select all', users);
       callback(null, users);
     }
   });
@@ -32,17 +30,6 @@ User.selectOne = function(user, callback) {
     })
 
 }
-
-// userSchema.methods.comparePassword = function(storePassword, attemptedPassword,callback) {
-//   bcrypt.compare(storedPassword, attemptedPassword, function(err, isMatch){
-//     if (err) {
-//       callback(err);
-//     } else {
-//       callback(null, isMatch);
-//     }
-//   });
-// }
-
 
 
 module.exports = User;

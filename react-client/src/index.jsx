@@ -11,7 +11,6 @@ class App extends React.Component {
       user: null,
       items: [],
       searchedPokemon: null
-      // items: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
@@ -45,7 +44,6 @@ class App extends React.Component {
         this.state.items.push(pokemon);
         context.setState({
           items: this.state.items
-          // items: this.state.examplePokemonData.concat([data])
         })
       },
       error: (err) => {
@@ -73,7 +71,6 @@ class App extends React.Component {
     $.ajax({
       url: '/users',
       type: 'POST',
-      // data: JSON.stringify(req)
       data: JSON.stringify(req),
       contentType: 'application/json',
       success: (data) => {
@@ -99,14 +96,12 @@ class App extends React.Component {
     var req = {};
     req.user = this.state.user;
     req.team = this.state.items;
-    // console.log('req.user', req.user);
     console.log('req from save', req);
     var context = this;
 
     $.ajax({
       url: '/users/save',
       type: 'POST',
-      // data: JSON.stringify(req)
       data: JSON.stringify(req),
       contentType: 'application/json',
       success: (data) => {

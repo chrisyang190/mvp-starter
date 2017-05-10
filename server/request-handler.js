@@ -42,11 +42,9 @@ exports.enterUser = function (req, res) {
       });
 
       newUser.save(function(error, newUser){
-      
-          console.log('User created');
           res.status(201).send(newUser);
-    
       })
+      
     } else {
       console.log('User Exists for enter user:', user)
       res.status(200).send(user);
