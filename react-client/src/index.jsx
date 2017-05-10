@@ -23,7 +23,6 @@ class App extends React.Component {
         this.setState({
           items: []
         })
-        console.log('data', data);
       },
       error: (err) => {
         console.log('err', err);
@@ -31,13 +30,10 @@ class App extends React.Component {
     });
   }
   addPokemon (number) {
-    console.log('clicked addPokemon');
     var context = this;
-    console.log('context', context);
     $.ajax({
       url: 'http://pokeapi.co/api/v2/pokemon/' + number + '/',
       success: (data) => {
-        console.log('name' , data);
         var pokemon = {};
         pokemon.name = data.name.slice(0,1).toUpperCase() + data.name.slice(1);
         pokemon.image = data.sprites.front_default;
@@ -53,7 +49,6 @@ class App extends React.Component {
   }
 
   handleChange (event) {
-    console.log('user set');
     this.setState({
       user: event.target.value,
       items: []
@@ -65,7 +60,6 @@ class App extends React.Component {
     var req = {};
     req.user = this.state.user;
     req.team = this.state.items;
-    console.log('req.user', req.user);
     var context = this;
 
     $.ajax({
@@ -74,7 +68,6 @@ class App extends React.Component {
       data: JSON.stringify(req),
       contentType: 'application/json',
       success: (data) => {
-        console.log('data in success function:' , data);
         context.setState({
           items: data.team
         })
@@ -105,7 +98,6 @@ class App extends React.Component {
       data: JSON.stringify(req),
       contentType: 'application/json',
       success: (data) => {
-        console.log('data in success function:' , data);
         context.setState({
           items: data.team
         })

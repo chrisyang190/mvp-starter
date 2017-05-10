@@ -8,7 +8,6 @@ var Promise = require("bluebird");
 exports.getAllUsers = function(req, res){
   User.selectAll(function(err, data){
     if(err) {
-      console.log('entered error');
       res.sendStatus(500);
     } else {
       res.json(data);
@@ -18,10 +17,8 @@ exports.getAllUsers = function(req, res){
 }
 
 exports.getOneUser = function(req, res) {
-  console.log('request', req)
   User.selectOne(req.body.user, function(err, data){
     if(err){
-      console.log('entered error');
       res.sendStatus(500);
     } else {
       res.json(data);
@@ -30,8 +27,6 @@ exports.getOneUser = function(req, res) {
 }
 
 exports.enterUser = function (req, res) {
-  console.log('entered user function');
-  console.log('request user in EnterUSER', req.body.user);
   var trainername = req.body.user;
   User.findOne({username: trainername})
   .exec(function(error, user){
@@ -44,9 +39,8 @@ exports.enterUser = function (req, res) {
       newUser.save(function(error, newUser){
           res.status(201).send(newUser);
       })
-      
+
     } else {
-      console.log('User Exists for enter user:', user)
       res.status(200).send(user);
     }
   })
@@ -54,7 +48,6 @@ exports.enterUser = function (req, res) {
 
 exports.saveUser = function(req, res){
   var trainername = req.body.user;
-  console.log('trainer name saved', req.body.user)
   User.findOne({username: trainername})
   .exec(function(error,user){
     if (!user){
@@ -64,11 +57,9 @@ exports.saveUser = function(req, res){
       });
 
       newUser.save(function(error, newUser){
-        console.log('User created from save');
         res.status(201).send(newUser);
       })
     } else {
-      console.log('User existing: saving user data', user)
       user.team = req.body.team;
       user.save(function(error, user){
         res.status(201).send(user);
