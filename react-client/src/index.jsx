@@ -85,11 +85,9 @@ class App extends React.Component {
   }
 
   saveTeam(event){
-    console.log('team saved');
     var req = {};
     req.user = this.state.user;
     req.team = this.state.items;
-    console.log('req from save', req);
     var context = this;
 
     $.ajax({
